@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abneer Shamawon</title>
+    <title>Abneer Shamawon - Personal Website</title>
 
     <style>
         * {
@@ -49,30 +49,37 @@
         .hero {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 80px 100px;
-            background: #f9f9f9;
+            justify-content: center;
+            height: 80vh;
+            padding: 0 50px;
+            background: url('https://media-hosting.imagekit.io/0c48105944224836/calm-lake-white-clouds.jpg?Expires=1840348017&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OgTV1LR0~LScb9EtjBGB~NrnrbqduLLicxMaDaDgthYJBBW7mmDxZ8hfvf6WlJvMcVtNBJijEJ1~9we9plVV8jxHN~m~wQFLViviDZbCLTPmAp6XucS6dyfyuOrrUjTKq~JT~QPn-XHvLien2Qmv8sYnZufExIRSTPkNGoSGxS3ehbujcxkfcBNI6Rr3s9WrauoisO0UdnrgiGoQpJ7Oz~aRE9m~SIxVrknAAhrGz1o3UiVpecuv57j1jLrNH69EDehWtBNpechTpCLzZG7ed8h0UoX5iTcefzHQ-Z1y71FQT8vHq7FgnrRNoMwwi4yhHfixLcGao9y3XklN297OWg__') no-repeat center center/cover;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            z-index: 1;
         }
 
         .hero-text {
-            max-width: 50%;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-text h1 {
             font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .hero-text h2 {
-            font-size: 36px;
             margin-bottom: 20px;
-            color: #555;
         }
 
         .hero-text p {
             font-size: 18px;
             margin-bottom: 30px;
-            color: #777;
         }
 
         .highlight {
@@ -89,11 +96,16 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: bold;
+            margin: 10px;
             transition: background 0.3s ease;
         }
 
         .btn:hover {
             background-color: #ff5722;
+        }
+
+        .hero-image {
+            display: none;
         }
     </style>
 </head>
@@ -111,14 +123,12 @@
 
     <section class="hero">
         <div class="hero-text">
-            <h1>Welcome to My Personal Website!</h1>
-            <h2>I'm Abneer Shamawon</h2>
-            <p>Currently studying and exploring new opportunities in various fields.</p>
-            <a href="about.html" class="btn">Learn More</a>
-        </div>
-        <div class="hero-image">
-            <img src="https://media-hosting.imagekit.io/9ddd83088eeb45b3/image-upscaled.jpeg?Expires=1840263346&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=LWBKHacX8zCGsalwN1MmCEplaTkuBYI34eMJpTAQawo7FXeD3X44N52FvNNZv2672lbJ4QywQSGKrCpciZqhwrf7stk8tl07UWk7rxOv6vGCgje8qoumeP56RNlwkPY0XpGCjD-FHr02QQmvmWp9i~QCVVr2JtfA9W2oICMcCehXG~r0smA-ZG-Qqt7a1agnhXA3dp1VQ57SObH2yrTUuEfoj4sOvbvavnCc8FgSAVHYO-Ys3EzPXzl1cYnNvG2QQurA~k7xqsDfW879vKEKFZNBCrHjaoyuR9lNjruqKEzPlcHKit72JE3XAo~hk3HMQPN1RSCEJtsu5e0THsErsg__" alt="Profile Image">
+            <h1>Hello, I'm <span class="highlight">Abneer Shamawon</span></h1>
+            <p>Currently studying and exploring new opportunities. Passionate about learning and growing!</p>
+            <a href="about.html" class="btn">Learn More About Me</a>
+            <a href="contact.html" class="btn">Get in Touch</a>
         </div>
     </section>
+
 </body>
 </html>
