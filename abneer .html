@@ -48,6 +48,7 @@
         /* Hero Section */
         .hero {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 80vh;
@@ -63,7 +64,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            background-color: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
@@ -104,8 +105,14 @@
             background-color: #ff5722;
         }
 
-        .hero-image {
-            display: none;
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ff7f50;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -123,6 +130,9 @@
 
     <section class="hero">
         <div class="hero-text">
+            <!-- Profile Picture -->
+            <img class="profile-pic" src="https://media-hosting.imagekit.io/9ddd83088eeb45b3/image-upscaled.jpeg?Expires=1840263346&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=LWBKHacX8zCGsalwN1MmCEplaTkuBYI34eMJpTAQawo7FXeD3X44N52FvNNZv2672lbJ4QywQSGKrCpciZqhwrf7stk8tl07UWk7rxOv6vGCgje8qoumeP56RNlwkPY0XpGCjD-FHr02QQmvmWp9i~QCVVr2JtfA9W2oICMcCehXG~r0smA-ZG-Qqt7a1agnhXA3dp1VQ57SObH2yrTUuEfoj4sOvbvavnCc8FgSAVHYO-Ys3EzPXzl1cYnNvG2QQurA~k7xqsDfW879vKEKFZNBCrHjaoyuR9lNjruqKEzPlcHKit72JE3XAo~hk3HMQPN1RSCEJtsu5e0THsErsg__" alt="Abneer Shamawon">
+
             <h1>Hello, I'm <span class="highlight">Abneer Shamawon</span></h1>
             <p>Currently studying and exploring new opportunities. Passionate about learning and growing!</p>
             <a href="about.html" class="btn">Learn More About Me</a>
