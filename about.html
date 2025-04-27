@@ -23,6 +23,38 @@
             padding: 20px;
         }
 
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff7f50;
+        }
+
         header {
             background-color: #4CAF50;
             color: white;
@@ -92,6 +124,19 @@
 </head>
 <body>
 
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">Abneer Shamawon</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Me Section -->
     <header>
         <h1>About Me</h1>
         <p>Welcome to my personal website</p>
