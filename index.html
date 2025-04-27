@@ -52,20 +52,34 @@
             justify-content: center;
             height: 80vh;
             padding: 0 50px;
-            background: #f9f9f9;
+            background: url('https://media-hosting.imagekit.io/0c48105944224836/calm-lake-white-clouds.jpg?Expires=1840348017&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OgTV1LR0~LScb9EtjBGB~NrnrbqduLLicxMaDaDgthYJBBW7mmDxZ8hfvf6WlJvMcVtNBJijEJ1~9we9plVV8jxHN~m~wQFLViviDZbCLTPmAp6XucS6dyfyuOrrUjTKq~JT~QPn-XHvLien2Qmv8sYnZufExIRSTPkNGoSGxS3ehbujcxkfcBNI6Rr3s9WrauoisO0UdnrgiGoQpJ7Oz~aRE9m~SIxVrknAAhrGz1o3UiVpecuv57j1jLrNH69EDehWtBNpechTpCLzZG7ed8h0UoX5iTcefzHQ-Z1y71FQT8vHq7FgnrRNoMwwi4yhHfixLcGao9y3XklN297OWg__') no-repeat center center/cover;
             text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            z-index: 1;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
         }
 
         .hero-text h1 {
             font-size: 48px;
             margin-bottom: 20px;
-            color: #333;
         }
 
         .hero-text p {
             font-size: 18px;
             margin-bottom: 30px;
-            color: #777;
         }
 
         .highlight {
@@ -82,6 +96,7 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: bold;
+            margin: 10px;
             transition: background 0.3s ease;
         }
 
