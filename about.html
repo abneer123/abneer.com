@@ -16,14 +16,14 @@
         }
 
         body {
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: #1c1c1c; /* Dark background to match home theme */
+            color: #fff; /* White text for better contrast */
             line-height: 1.6;
             font-size: 16px;
             padding: 20px;
         }
 
-        /* Navbar */
+        /* Navbar and buttons styling */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -36,6 +36,7 @@
         .navbar .logo {
             font-size: 24px;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
         .navbar ul {
@@ -48,25 +49,46 @@
             text-decoration: none;
             color: #fff;
             font-weight: 500;
-            transition: color 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease, padding 0.3s ease;
+        }
+
+        .navbar ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #ff5722;
+            bottom: 0;
+            left: 50%;
+            transition: width 0.3s ease, left 0.3s ease;
         }
 
         .navbar ul li a:hover {
-            color: #ff7f50;
+            color: #ff5722; /* Accent color for hover effect */
         }
 
+        .navbar ul li a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Header Styling */
         header {
-            background-color: #4CAF50;
-            color: white;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark header background */
+            color: #ff5722; /* Accent color matching home theme */
             text-align: center;
             padding: 20px;
             border-radius: 10px;
+            margin-top: 40px;
         }
 
         header h1 {
             margin-bottom: 10px;
         }
 
+        /* Content and About Section */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -93,17 +115,19 @@
         .about-me-text h2 {
             font-size: 24px;
             margin-bottom: 15px;
-            color: #4CAF50;
+            color: #ff5722; /* Accent color for headings */
         }
 
         .about-me-text p {
             font-size: 18px;
             margin-bottom: 15px;
             line-height: 1.8;
+            color: #bbb; /* Light grey text for better readability */
         }
 
+        /* Footer Styling */
         footer {
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.7); /* Footer background matches header */
             color: white;
             text-align: center;
             padding: 10px;
@@ -113,18 +137,31 @@
         }
 
         footer a {
-            color: #4CAF50;
+            color: #ff5722; /* Accent color for footer links */
             text-decoration: none;
         }
 
         footer a:hover {
             text-decoration: underline;
         }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .about-me {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-me img {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Navbar with Contact and Home buttons -->
     <header class="navbar">
         <div class="logo">Abneer Shamawon</div>
         <nav>
@@ -136,12 +173,13 @@
         </nav>
     </header>
 
-    <!-- About Me Section -->
+    <!-- About Me Header -->
     <header>
         <h1>About Me</h1>
         <p>Welcome to my personal website</p>
     </header>
 
+    <!-- About Me Content -->
     <div class="container">
         <section class="about-me">
             <img src="https://media-hosting.imagekit.io/9ddd83088eeb45b3/image-upscaled.jpeg?Expires=1840263346&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=LWBKHacX8zCGsalwN1MmCEplaTkuBYI34eMJpTAQawo7FXeD3X44N52FvNNZv2672lbJ4QywQSGKrCpciZqhwrf7stk8tl07UWk7rxOv6vGCgje8qoumeP56RNlwkPY0XpGCjD-FHr02QQmvmWp9i~QCVVr2JtfA9W2oICMcCehXG~r0smA-ZG-Qqt7a1agnhXA3dp1VQ57SObH2yrTUuEfoj4sOvbvavnCc8FgSAVHYO-Ys3EzPXzl1cYnNvG2QQurA~k7xqsDfW879vKEKFZNBCrHjaoyuR9lNjruqKEzPlcHKit72JE3XAo~hk3HMQPN1RSCEJtsu5e0THsErsg" alt="Abneer Shamawon">
@@ -154,6 +192,7 @@
         </section>
     </div>
 
+    <!-- Footer with Contact Link -->
     <footer>
         <p>Connect with me: <a href="mailto:pastorarshad79@gmail.com">Email me</a></p>
     </footer>
