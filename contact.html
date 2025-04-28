@@ -17,8 +17,8 @@
         }
 
         body {
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #1c1c1c; /* Dark background to match home theme */
+            color: #fff; /* White text for better contrast */
             line-height: 1.6;
         }
 
@@ -27,20 +27,27 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.7); /* Darker background for navbar */
             color: #fff;
         }
 
         .navbar .logo {
             font-size: 24px;
             font-weight: bold;
-            text-transform: uppercase;
+            color: #ff5722; /* Matching color with the home page */
         }
 
         .navbar ul {
             list-style: none;
             display: flex;
             gap: 20px;
+        }
+
+        .navbar ul li {
+            background-color: #ff5722; /* Button-like background */
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
         .navbar ul li a {
@@ -50,13 +57,17 @@
             transition: color 0.3s ease;
         }
 
+        .navbar ul li:hover {
+            background-color: #e67e22; /* Hover effect similar to home buttons */
+        }
+
         .navbar ul li a:hover {
-            color: #ff7f50;
+            color: #fff; /* Ensures text stays white on hover */
         }
 
         .contact-container {
             padding: 50px 100px;
-            background-color: #fff;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background to match home page */
             max-width: 1200px;
             margin: 40px auto;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -74,24 +85,24 @@
         .contact-text h2 {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #333;
+            color: #ff5722; /* Accent color */
         }
 
         .contact-text p {
             font-size: 18px;
-            color: #777;
+            color: #bbb; /* Light grey text for contrast */
             margin-bottom: 30px;
         }
 
         .contact-text a {
-            color: #ff7f50;
+            color: #ff5722;
             font-weight: bold;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .contact-text a:hover {
-            color: #e67e22;
+            color: #e67e22; /* Slightly lighter shade on hover */
         }
 
         .profile-image {
