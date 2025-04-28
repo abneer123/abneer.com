@@ -19,13 +19,15 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 50px;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.7); /* Darker background for navbar */
             color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
         }
 
         .navbar .logo {
             font-size: 24px;
             font-weight: bold;
+            color: #ff5722; /* A warm color that matches the button */
         }
 
         .navbar ul {
@@ -42,7 +44,7 @@
         }
 
         .navbar ul li a:hover {
-            color: #ff7f50;
+            color: #ff5722;
         }
 
         /* Hero Section */
@@ -50,12 +52,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 80vh;
+            height: 100vh;
             padding: 0 50px;
-            background: url('https://media-hosting.imagekit.io/0c48105944224836/calm-lake-white-clouds.jpg?Expires=1840348017&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OgTV1LR0~LScb9EtjBGB~NrnrbqduLLicxMaDaDgthYJBBW7mmDxZ8hfvf6WlJvMcVtNBJijEJ1~9we9plVV8jxHN~m~wQFLViviDZbCLTPmAp6XucS6dyfyuOrrUjTKq~JT~QPn-XHvLien2Qmv8sYnZufExIRSTPkNGoSGxS3ehbujcxkfcBNI6Rr3s9WrauoisO0UdnrgiGoQpJ7Oz~aRE9m~SIxVrknAAhrGz1o3UiVpecuv57j1jLrNH69EDehWtBNpechTpCLzZG7ed8h0UoX5iTcefzHQ-Z1y71FQT8vHq7FgnrRNoMwwi4yhHfixLcGao9y3XklN297OWg__') no-repeat center center/cover;
+            background: url('https://i.redd.it/gaming-wallpapers-3840-x-2160-uhd-v0-fr4m7cy20whd1.jpg?width=5120&format=pjpg&auto=webp&s=6caf6275b910167617eada9bf7340ef7257259cd') no-repeat center center/cover;
+            background-attachment: fixed;
             text-align: center;
             color: #fff;
             position: relative;
+            transition: all 0.5s ease;
+            background-size: cover;
+            background-position: center center;
         }
 
         .hero::before {
@@ -63,33 +69,47 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for better text visibility */
             z-index: 1;
         }
 
         .hero-text {
             position: relative;
             z-index: 2;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-text h1 {
-            font-size: 48px;
+            font-size: 50px;
             margin-bottom: 20px;
+            font-weight: 700;
+            color: #ff5722; /* Matching color for your name */
         }
 
         .hero-text p {
-            font-size: 18px;
+            font-size: 22px;
             margin-bottom: 30px;
+            font-weight: 300;
         }
 
         .highlight {
-            color: #ff7f50;
+            color: #ff5722; /* Highlight color for name */
         }
 
+        /* Button Styles */
         .btn {
             display: inline-block;
             padding: 12px 30px;
-            background-color: #ff7f50;
+            background-color: #ff5722; /* Button color matching the name */
             color: #fff;
             border: none;
             border-radius: 30px;
@@ -97,11 +117,31 @@
             font-size: 16px;
             font-weight: bold;
             margin: 10px;
-            transition: background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 200%;
+            height: 100%;
+            background-color: #ff7f50; /* A lighter shade for button hover effect */
+            transition: all 0.3s ease;
+            transform: translateX(-50%) scaleX(0);
+            transform-origin: center;
+        }
+
+        .btn:hover::before {
+            transform: translateX(-50%) scaleX(1);
         }
 
         .btn:hover {
-            background-color: #ff5722;
+            color: #fff;
+            transform: scale(1.1);
         }
 
         .hero-image {
@@ -114,9 +154,9 @@
         <div class="logo">Abneer Shamawon</div>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html" class="btn">Home</a></li>
+                <li><a href="about.html" class="btn">About</a></li>
+                <li><a href="contact.html" class="btn">Contact</a></li>
             </ul>
         </nav>
     </header>
