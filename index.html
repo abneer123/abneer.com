@@ -201,16 +201,24 @@
           <strong>2025 - Business Presentation</strong>
         </div>
         <div class="card">
-          <img class="zoomable" src="The Style Gentleman.png" alt="Business Website">
-          <strong>2025 - Business Website</strong>
+          <img class="zoomable" src="Portfolio.png" alt="Business Website">
+          <strong>2025 - Business Presentation</strong>
         </div>
         <div class="card">
-          <img class="zoomable" src="A Step Towards Learning.png" alt="Educational Presentation">
-          <strong>2025 - Educational Presentation</strong>
+          <img class="zoomable" src="Presented by Abneer.png" alt="Educational Presentation">
+          <strong>2025 - Business Presentation</strong>
         </div>
         <div class="card">
           <img class="zoomable" src="Untitled design.png" alt="Educational Website">
-          <strong>2025 - Educational Website</strong>
+          <strong>2025 - Educational Presentation</strong>
+        </div>
+        <div class="card">
+          <img class="zoomable" src="Mr. Abneer Grade 1.png" alt="Educational Website">
+          <strong>2025 - Educational Presentation</strong>
+        </div>
+         <div class="card">
+          <img class="zoomable" src="Untitled.png" alt="Educational Website">
+          <strong>2025 - Educational Presentation</strong>
         </div>
       </div>
     </section>
@@ -225,7 +233,85 @@
       </p>
     </section>
   </main>
+<!-- ADD THIS inside <body> (after <main> or before <footer>) -->
+<div style="text-align: center; margin-top: 2rem;">
+  <button id="showOptions" style="
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  ">Hire Me</button>
+</div>
 
+<!-- POPUP MODAL -->
+<div id="popup" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+">
+  <div style="
+    background: #1c1c1c;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    text-align: center;
+  ">
+    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Select Your Presentation Type</h2>
+    <div style="display: flex; gap: 1rem; justify-content: center;">
+      <a href="https://www.fiverr.com/s/8zEP24o" target="_blank" style="
+        padding: 10px 20px;
+        background: #00c6ff;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      " onmouseover="this.style.background='#0099cc'" onmouseout="this.style.background='#00c6ff'">
+        🎓 Educational
+      </a>
+      <a href="https://www.fiverr.com/s/38ql32m" target="_blank" style="
+        padding: 10px 20px;
+        background: #4ea8ff;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      " onmouseover="this.style.background='#1a8cff'" onmouseout="this.style.background='#4ea8ff'">
+        💼 Business
+      </a>
+    </div>
+    <button onclick="popup.style.display='none'" style="
+      margin-top: 1.5rem;
+      background: transparent;
+      color: white;
+      border: 1px solid #ccc;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    ">Close</button>
+  </div>
+</div>
+
+<!-- ADD THIS SCRIPT just before </body> -->
+<script>
+  const showOptions = document.getElementById("showOptions");
+  const popup = document.getElementById("popup");
+
+  showOptions.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+</script>
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Abneer Shamawon. All rights reserved.</p>
