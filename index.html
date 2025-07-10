@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abneer Shamawon - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4ea8ff;
+      --secondary-color: #0d6efd;
+      --bg-dark: #121212;
+      --text-light: #f1f1f1;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-radius: 16px;
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-light);
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.92)),
+        url('https://images.unsplash.com/photo-1708243690642-002aa570c1f8?w=1600&auto=format&fit=crop&q=60') no-repeat center center fixed;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      text-align: center;
+      position: relative;
+      padding: 4rem 2rem 6rem;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    header img {
+      width: 120px;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 1;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin: 2rem 0 1rem;
+      border-left: 4px solid var(--primary-color);
+      padding-left: 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .skills, .experience {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--card-radius);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      color: var(--text-light);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+
+    .email {
+      font-weight: bold;
+      color: var(--primary-color);
+      word-break: break-word;
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #aaa;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* Hover Zoom Preview */
+    .hover-preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      display: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .hover-preview img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(78, 168, 255, 0.5);
+      transition: transform 0.3s ease;
+      transform: scale(1);
+    }
+
+    .hover-preview.show img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="header-content">
+      <img class="zoomable" src="abneer.png" alt="Abneer Shamawon's Profile Picture">
+      <h1>Abneer Shamawon</h1>
+      <p>Presentation & Website Designer</p>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 320">
+      <path fill="#121212" fill-opacity="1" d="M0,192L80,170.7C160,149,320,107,480,106.7C640,107,800,149,960,154.7C1120,160,1280,128,1360,112L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+    </svg>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section>
+      <h2 class="section-title">About Me</h2>
+      <p>
+        Hi! I'm Abneer Shamawon, a 9th-grade student passionate about creating beautiful presentations and websites.
+        I use PowerPoint, Canva, and HTML. I've designed many school and business projects and always focus on delivering clear, creative results. Let's work together!
+      </p>
+    </section>
+
+    <section>
+      <h2 class="section-title">Skills</h2>
+      <div class="grid skills">
+        <div class="card">PowerPoint Presentation Design</div>
+        <div class="card">HTML / CSS Web Design</div>
+        <div class="card">Responsive Website Layouts</div>
+        <div class="card">Fast Delivery & Communication</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Experience</h2>
+      <div class="grid experience">
+        <div class="card">
+          <img class="zoomable" src="Presented by Abneer Shamawon.png" alt="Business Presentation">
+          <strong>2025 - Business Presentation</strong>
+        </div>
+        <div class="card">
+          <img class="zoomable" src="Portfolio.png" alt="Business Website">
+          <strong>2025 - Business Presentation</strong>
+        </div>
+        <div class="card">
+          <img class="zoomable" src="Presented by Abneer.png" alt="Educational Presentation">
+          <strong>2025 - Business Presentation</strong>
+        </div>
+        <div class="card">
+          <img class="zoomable" src="Untitled design.png" alt="Educational Website">
+          <strong>2025 - Educational Presentation</strong>
+        </div>
+        <div class="card">
+          <img class="zoomable" src="Mr. Abneer Grade 1.png" alt="Educational Website">
+          <strong>2025 - Educational Presentation</strong>
+        </div>
+         <div class="card">
+          <img class="zoomable" src="Untitled.png" alt="Educational Website">
+          <strong>2025 - Educational Presentation</strong>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="email">
+        <a href="mailto:pastorarshad79@gmail.com">pastorarshad79@gmail.com</a>
+      </p>
+      <p class="email">
+        <a href="mailto:sabundani82@gmail.com">sabundani82@gmail.com</a>
+      </p>
+    </section>
+  </main>
+<!-- ADD THIS inside <body> (after <main> or before <footer>) -->
+<div style="text-align: center; margin-top: 2rem;">
+  <button id="showOptions" style="
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  ">Hire Me</button>
+</div>
+
+<!-- POPUP MODAL -->
+<div id="popup" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+">
+  <div style="
+    background: #1c1c1c;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    text-align: center;
+  ">
+    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Select Your Presentation Type</h2>
+    <div style="display: flex; gap: 1rem; justify-content: center;">
+      <a href="https://www.fiverr.com/s/8zEP24o" target="_blank" style="
+        padding: 10px 20px;
+        background: #00c6ff;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      " onmouseover="this.style.background='#0099cc'" onmouseout="this.style.background='#00c6ff'">
+        🎓 Educational
+      </a>
+      <a href="https://www.fiverr.com/s/38ql32m" target="_blank" style="
+        padding: 10px 20px;
+        background: #4ea8ff;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      " onmouseover="this.style.background='#1a8cff'" onmouseout="this.style.background='#4ea8ff'">
+        💼 Business
+      </a>
+    </div>
+    <button onclick="popup.style.display='none'" style="
+      margin-top: 1.5rem;
+      background: transparent;
+      color: white;
+      border: 1px solid #ccc;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    ">Close</button>
+  </div>
+</div>
+
+<!-- ADD THIS SCRIPT just before </body> -->
+<script>
+  const showOptions = document.getElementById("showOptions");
+  const popup = document.getElementById("popup");
+
+  showOptions.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+</script>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Abneer Shamawon. All rights reserved.</p>
+  </footer>
+
+  <!-- Hover Zoom Preview -->
+  <div class="hover-preview" id="hoverPreview">
+    <img id="hoverPreviewImg" src="" alt="Zoom Preview" />
+  </div>
+
+  <!-- Script for Hover Zoom -->
+  <script>
+    const preview = document.getElementById("hoverPreview");
+    const previewImg = document.getElementById("hoverPreviewImg");
+    const zoomableImages = document.querySelectorAll(".zoomable");
+    let hideTimeout;
+
+    zoomableImages.forEach(img => {
+      img.addEventListener("mouseover", () => {
+        clearTimeout(hideTimeout);
+        previewImg.src = img.src;
+        preview.style.display = "flex";
+      });
+
+      img.addEventListener("mouseout", () => {
+        hideTimeout = setTimeout(() => {
+          preview.style.display = "none";
+        }, 200);
+      });
+    });
+
+    preview.addEventListener("mouseover", () => {
+      clearTimeout(hideTimeout);
+    });
+
+    preview.addEventListener("mouseout", () => {
+      preview.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
