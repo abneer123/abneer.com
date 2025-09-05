@@ -1,349 +1,928 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abneer Shamawon - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #4ea8ff;
-      --secondary-color: #0d6efd;
-      --bg-dark: #121212;
-      --text-light: #f1f1f1;
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --card-radius: 16px;
-      --transition-speed: 0.3s;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Abneer Shamawon Pharmacy — Trusted Online Medicines</title>
+<style>
+  /* -------------------------
+     Theme & base
+     ------------------------- */
+  :root{
+    --bg:#06121a;
+    --glass: rgba(255,255,255,0.06);
+    --glass-2: rgba(255,255,255,0.03);
+    --accent-green:#34c759;
+    --accent-blue:#007aff;
+    --muted: rgba(255,255,255,0.65);
+    --glass-border: rgba(255,255,255,0.08);
+    --glass-shadow: 0 6px 30px rgba(2,8,23,0.6);
+    --glass-blur: 12px;
+    --glass-radius: 14px;
+    --glass-padding: 18px;
+    --max-width: 1200px;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%}
+  body{
+    margin:0;
+    background: radial-gradient(1200px 800px at 10% 10%, rgba(0,122,255,0.06), transparent),
+                radial-gradient(800px 600px at 90% 85%, rgba(52,199,89,0.04), transparent),
+                var(--bg);
+    color:#e9f1f6;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  /* global container */
+  .container{max-width:var(--max-width);margin:0 auto;padding:0 20px;}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-light);
-      background: 
-        linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.92)),
-        url('https://images.unsplash.com/photo-1708243690642-002aa570c1f8?w=1600&auto=format&fit=crop&q=60') no-repeat center center fixed;
-      background-size: cover;
-      background-attachment: fixed;
-    }
+  /* -------------------------
+     Floating background capsules/molecules
+     ------------------------- */
+  .float-bg{
+    position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+  }
+  .molecule{
+    position:absolute;
+    width:60px;height:60px;
+    background:linear-gradient(45deg,var(--accent-blue),var(--accent-green));
+    border-radius:28px;
+    filter:blur(6px);
+    opacity:0.08;
+    transform-origin:center;
+    animation: floatmove linear infinite;
+  }
+  .molecule.small{width:30px;height:30px;border-radius:18px;opacity:0.06;filter:blur(4px);}
+  .molecule.large{width:110px;height:50px;border-radius:36px;opacity:0.04;filter:blur(14px);}
 
-    a {
-      color: var(--primary-color);
-      text-decoration: none;
-    }
+  @keyframes floatmove{
+    from{transform: translate3d(0,0,0) rotate(0deg)}
+    to{transform: translate3d(-10vw,-60vh,0) rotate(360deg)}
+  }
 
-    header {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white;
-      text-align: center;
-      position: relative;
-      padding: 4rem 2rem 6rem;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    }
+  /* -------------------------
+     Sticky navbar
+     ------------------------- */
+  header.navbar{
+    position:sticky;top:0;z-index:40;
+    backdrop-filter: blur(8px) saturate(120%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border-bottom:1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;max-width:var(--max-width);margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo {
+    width:46px;height:46px;border-radius:10px;
+    background: linear-gradient(135deg,var(--accent-green),var(--accent-blue));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 -4px 8px rgba(255,255,255,0.06);
+    font-weight:700;color:#031017;font-size:18px;
+  }
+  .brand-text{line-height:1}
+  .brand-text .name{font-weight:700}
+  .nav-links{display:flex;gap:18px;align-items:center}
+  .nav-links a{
+    color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;position:relative;transition:all .25s;
+    font-weight:600;font-size:14px;
+  }
+  .nav-links a:hover{
+    color:white;
+    transform:translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 14px rgba(0,122,255,0.07);
+  }
+  .glow-btn{
+    background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));
+    color:#021018;padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer;
+    box-shadow: 0 8px 30px rgba(52,199,89,0.08), 0 0 30px rgba(0,122,255,0.06);
+  }
 
-    .header-content {
-      position: relative;
-      z-index: 2;
-    }
+  /* small-screen nav */
+  .nav-toggle{display:none;background:transparent;border:0;color:var(--muted);font-size:22px;padding:8px}
+  @media (max-width:900px){
+    .nav-links{display:none;position:absolute;top:64px;left:10px;right:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;flex-direction:column}
+    .nav-links.mobile-open{display:flex}
+    .nav-toggle{display:block}
+  }
 
-    header img {
-      width: 120px;
-      border-radius: 50%;
-      border: 4px solid white;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-    }
+  /* -------------------------
+     Hero
+     ------------------------- */
+  .hero{
+    min-height:92vh;display:flex;align-items:center;position:relative;z-index:10;
+    padding:36px 0;
+  }
+  .hero-grid{display:grid;grid-template-columns:1fr 560px;align-items:center;gap:40px;width:100%;max-width:var(--max-width);margin:0 auto;padding:0 20px;}
+  .hero-copy h1{font-size:40px;line-height:1.02;margin:0 0 16px}
+  .hero-copy p{color:rgba(255,255,255,0.75);margin:0 0 22px;font-size:16px}
+  .cta-row{display:flex;gap:12px;align-items:center}
+  .shop-now{
+    font-size:16px;padding:14px 22px;border-radius:12px;border:none;cursor:pointer;
+    background: linear-gradient(90deg, rgba(0,122,255,0.15), rgba(52,199,89,0.12));
+    color:white;backdrop-filter: blur(6px);
+    box-shadow: 0 8px 40px rgba(0,122,255,0.12), 0 4px 12px rgba(52,199,89,0.06);
+    position:relative;overflow:visible;
+  }
+  .shop-now::after{
+    content:'';position:absolute;inset:0;border-radius:12px;box-shadow:0 0 40px rgba(0,122,255,0.25);opacity:0;transition:opacity .25s;
+  }
+  .shop-now.glow{animation:glowPulse 2s infinite}
+  @keyframes glowPulse{0%{box-shadow:0 8px 30px rgba(0,122,255,0.12)}50%{box-shadow:0 20px 60px rgba(52,199,89,0.15)}100%{box-shadow:0 8px 30px rgba(0,122,255,0.12)}}
 
-    .wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: auto;
-      z-index: 1;
-    }
+  /* hero 3D scene */
+  .scene{
+    perspective:1600px;display:flex;align-items:center;justify-content:center;
+  }
+  .orb{
+    width:460px;height:360px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid var(--glass-border);backdrop-filter:blur(var(--glass-blur));box-shadow:var(--glass-shadow);
+    display:flex;align-items:center;justify-content:center;position:relative;transform-style:preserve-3d;
+    padding:18px;
+  }
+  /* simulated 3D objects */
+  .capsule{
+    width:72px;height:32px;border-radius:24px;position:absolute;transform-style:preserve-3d;
+    display:flex;align-items:center;justify-content:center;
+    animation: rotateObj 14s linear infinite;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 2px 8px rgba(255,255,255,0.02) inset;
+  }
+  .capsule .half{width:50%;height:100%;border-radius:24px}
+  .c-blue{background:linear-gradient(180deg,#0089ff,#004ccf)}
+  .c-green{background:linear-gradient(180deg,#4de07a,#06a65a)}
+  .pill{width:20px;height:20px;border-radius:6px;background:linear-gradient(180deg,#fff,#f0f6ff);position:absolute;animation: pillFloat 8s infinite ease-in-out}
+  .bottle{
+    width:56px;height:86px;border-radius:12px;position:absolute;bottom:40px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(240,248,255,0.92));
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    display:flex;flex-direction:column;align-items:center;padding-top:8px;border:1px solid rgba(2,8,23,0.06);
+    transform-origin:center;
+    animation: bottleWiggle 9s ease-in-out infinite;
+  }
+  .bottle-cap{width:36px;height:10px;border-radius:4px;background:#021017;margin-bottom:6px;box-shadow:0 4px 12px rgba(0,0,0,0.5)}
+  .bottle-label{width:40px;height:34px;border-radius:6px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));margin-top:6px;font-size:11px;color:#021017;font-weight:700;display:flex;align-items:center;justify-content:center}
+  @keyframes rotateObj{
+    from{transform: rotateY(0) translateZ(0) rotateX(0)}
+    to{transform: rotateY(360deg) translateZ(0) rotateX(10deg)}
+  }
+  @keyframes pillFloat{
+    0%{transform:translateY(0) translateX(0) rotate(0)}
+    50%{transform:translateY(-18px) translateX(8px) rotate(30deg)}
+    100%{transform:translateY(0) translateX(0) rotate(0)}
+  }
+  @keyframes bottleWiggle{
+    0%{transform: translateY(0) rotate(-3deg)}
+    50%{transform: translateY(-12px) rotate(6deg)}
+    100%{transform: translateY(0) rotate(-3deg)}
+  }
 
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem;
-    }
+  /* hero textual micro-cards */
+  .micro-cards{display:flex;gap:12px;position:absolute;left:18px;bottom:16px}
+  .micro{background:var(--glass);border-radius:10px;padding:10px 12px;border:1px solid var(--glass-border);backdrop-filter: blur(8px)}
+  .micro strong{display:block;font-size:14px}
+  .micro span{font-size:12px;color:var(--muted)}
 
-    .section-title {
-      font-size: 1.8rem;
-      color: var(--primary-color);
-      margin: 2rem 0 1rem;
-      border-left: 4px solid var(--primary-color);
-      padding-left: 0.75rem;
-    }
+  /* animated entrance */
+  .fade-in{opacity:0;transform:translateY(12px);animation:enter .9s cubic-bezier(.2,.9,.25,1) forwards}
+  .fade-in.delay-1{animation-delay:.12s}
+  .fade-in.delay-2{animation-delay:.24s}
+  .fade-in.delay-3{animation-delay:.36s}
+  @keyframes enter{to{opacity:1;transform:none}}
 
-    .grid {
-      display: grid;
-      gap: 1.5rem;
-    }
+  /* -------------------------
+     Sections / cards
+     ------------------------- */
+  section{padding:60px 0;position:relative;z-index:10}
+  h2.section-title{font-size:22px;margin:6px 0 22px}
+  .glass-card{
+    background:var(--glass);border-radius:var(--glass-radius);padding:var(--glass-padding);
+    border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+  }
 
-    .skills, .experience {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
+  /* product grid */
+  .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .product-card{
+    height:320px;border-radius:14px;padding:16px;position:relative;overflow:visible;
+    display:flex;flex-direction:column;gap:12px;justify-content:space-between;
+    transition:transform .3s ease, box-shadow .3s;
+  }
+  .product-card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(0,0,0,0.6)}
+  .product-3d{
+    width:100%;height:160px;display:flex;align-items:center;justify-content:center;position:relative;perspective:900px;
+  }
+  /* 3D model shell */
+  .model{
+    width:120px;height:120px;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.9,.25,1);
+    animation: drift 8s ease-in-out infinite;
+  }
+  .model .face{
+    position:absolute;inset:0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;
+    color:#021018;text-shadow:none;
+  }
+  .capsule-model .face{background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));border-radius:60px}
+  .bottle-model .face{background:linear-gradient(180deg,#ffffff,#f8fbff);border-radius:12px}
+  .pill-model .face{background:linear-gradient(180deg,#fff,#f4f7ff);border-radius:12px}
+  @keyframes drift{
+    0%{transform: rotateX(0) rotateY(0) rotateZ(0) translateY(0)}
+    50%{transform: rotateX(10deg) rotateY(20deg) rotateZ(3deg) translateY(-6px)}
+    100%{transform: rotateX(0) rotateY(0) rotateZ(0) translateY(0)}
+  }
 
-    .card {
-      background-color: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: var(--card-radius);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      color: var(--text-light);
-      backdrop-filter: blur(8px);
-      position: relative;
-      overflow: hidden;
-    }
+  .product-info{display:flex;flex-direction:column;gap:8px}
+  .product-title{font-size:16px;font-weight:700}
+  .product-desc{font-size:13px;color:var(--muted)}
+  .product-bottom{display:flex;justify-content:space-between;align-items:center}
+  .price{font-weight:800;font-size:16px}
+  .add-btn{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));color:#021018;font-weight:800;transition:transform .18s}
+  .add-btn:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,122,255,0.08)}
 
-    .card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      cursor: pointer;
-    }
+  /* filters */
+  .filters{display:flex;gap:10px;flex-wrap:wrap}
+  .filter-btn{
+    padding:8px 12px;border-radius:10px;border:1px solid var(--glass-border);background:transparent;color:var(--muted);cursor:pointer;font-weight:700;
+    backdrop-filter: blur(6px);transition:transform .18s, box-shadow .2s, color .18s;
+  }
+  .filter-btn.active{background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));color:#021018;box-shadow:0 10px 28px rgba(0,122,255,0.06)}
 
-    .email {
-      font-weight: bold;
-      color: var(--primary-color);
-      word-break: break-word;
-      margin-bottom: 0.5rem;
-    }
+  /* -------------------------
+     Cart popup
+     ------------------------- */
+  .cart-btn{
+    background:transparent;border:1px solid var(--glass-border);padding:8px 12px;border-radius:12px;cursor:pointer;color:var(--muted);
+  }
+  .cart-panel{
+    position:fixed;right:18px;top:86px;width:360px;max-width:92vw;border-radius:12px;padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid var(--glass-border);box-shadow:0 30px 60px rgba(0,0,0,0.6);z-index:60;transform-origin:top right;transform:translateY(-12px) scale(.98);opacity:0;transition:all .28s;
+  }
+  .cart-panel.open{opacity:1;transform:translateY(0) scale(1)}
+  .cart-item{display:flex;gap:12px;align-items:center;padding:8px 6px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+  .cart-item:last-child{border-bottom:none}
+  .cart-thumb{width:56px;height:56px;border-radius:10px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));display:flex;align-items:center;justify-content:center;font-weight:800;color:#021018}
+  .qty-controls{display:flex;gap:6px;align-items:center}
+  .qty-controls button{background:transparent;border:1px solid var(--glass-border);padding:6px;border-radius:6px;color:var(--muted);cursor:pointer}
+  .checkout-btn{width:100%;padding:12px;border-radius:12px;background:linear-gradient(90deg,var(--accent-green),var(--accent-blue));color:#021018;font-weight:900;border:none;cursor:pointer;margin-top:12px;transition:transform .24s, box-shadow .24s}
+  .checkout-btn.pulse{animation:checkoutPulse .9s ease-in-out}
+  @keyframes checkoutPulse{
+    0%{transform:scale(1);box-shadow:0 8px 30px rgba(52,199,89,0.06)}
+    50%{transform:scale(1.03);box-shadow:0 18px 60px rgba(52,199,89,0.12)}
+    100%{transform:scale(1);box-shadow:0 8px 30px rgba(52,199,89,0.06)}
+  }
 
-    footer {
-      background-color: rgba(0, 0, 0, 0.7);
-      color: #aaa;
-      text-align: center;
-      padding: 1.5rem;
-      margin-top: 3rem;
-    }
+  /* -------------------------
+     About (infographics)
+     ------------------------- */
+  .about-grid{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+  .info-row{display:flex;gap:18px;align-items:center}
+  .stat{
+    background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:10px;border:1px solid var(--glass-border);
+  }
+  .floating-icon{width:120px;height:120px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent-green),var(--accent-blue));box-shadow:0 20px 50px rgba(0,0,0,0.6);transform-origin:center;animation: iconfloat 7s ease-in-out infinite}
+  @keyframes iconfloat{0%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-10px) rotate(6deg)}100%{transform:translateY(0) rotate(-6deg)}}
 
-    .hover-preview {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      display: none;
-      transition: opacity 0.3s ease;
-    }
+  /* -------------------------
+     Contact & chat bubble
+     ------------------------- */
+  .contact-form{display:grid;gap:12px}
+  .form-row input,.form-row textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--glass-border);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);color:inherit;resize:vertical}
+  .send-btn{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));border:none;color:#021018;font-weight:800;cursor:pointer}
 
-    .hover-preview img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 16px;
-      box-shadow: 0 0 40px rgba(78, 168, 255, 0.5);
-      transition: transform 0.3s ease;
-      transform: scale(1);
-    }
+  .chat-bubble{
+    position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));
+    width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#021018;z-index:80;box-shadow:0 20px 60px rgba(0,0,0,0.6);cursor:pointer;animation: chatBob 4s ease-in-out infinite;
+  }
+  @keyframes chatBob{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
 
-    .hover-preview.show img {
-      transform: scale(1.05);
-    }
-  </style>
-  <link rel="icon" type="Untitled design" href="Untitled design.png">
-<meta name="google-site-verification" content="googlee682b7f9912f63f8" />
-  <!-- baaki head content -->
-</head>
+  /* footer */
+  footer{padding:28px 0;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));border-top:1px solid var(--glass-border)}
+  .footer-grid{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .socials a{margin-left:10px;text-decoration:none;color:var(--muted)}
 
+  /* small screens */
+  @media (max-width:1100px){ .hero-grid{grid-template-columns:1fr 420px} .products-grid{grid-template-columns:repeat(2,1fr)} .about-grid{grid-template-columns:1fr;}}
+  @media (max-width:700px){
+    .hero-grid{grid-template-columns:1fr;gap:18px}
+    .products-grid{grid-template-columns:1fr}
+    .hero-copy h1{font-size:28px}
+  }
+
+  /* accessibility focus */
+  a:focus, button:focus, input:focus, textarea:focus{outline:2px dashed rgba(0,122,255,0.18);outline-offset:4px}
+</style>
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header>
-    <div class="header-content">
-      <img class="zoomable" src="abneer.png" alt="Abneer Shamawon's Profile Picture">
-      <h1>Abneer Shamawon</h1>
-      <p>Presentation & Website Designer</p>
+<!-- Floating background shapes -->
+<div class="float-bg" aria-hidden="true">
+  <div class="molecule large" style="left:6%;top:10%;animation-duration:48s"></div>
+  <div class="molecule" style="left:20%;top:70%;animation-duration:36s"></div>
+  <div class="molecule small" style="left:40%;top:25%;animation-duration:22s"></div>
+  <div class="molecule" style="left:76%;top:55%;animation-duration:30s"></div>
+  <div class="molecule large" style="left:86%;top:12%;animation-duration:52s"></div>
+</div>
+
+<header class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner container">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">AS</div>
+      <div class="brand-text">
+        <div class="name">Abneer Shamawon Pharmacy</div>
+        <div class="tagline" style="font-size:12px;color:var(--muted)">Trusted Online Medicines</div>
+      </div>
     </div>
-    <svg class="wave" viewBox="0 0 1440 320">
-      <path fill="#121212" fill-opacity="1" d="M0,192L80,170.7C160,149,320,107,480,106.7C640,107,800,149,960,154.7C1120,160,1280,128,1360,112L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-    </svg>
-  </header>
 
-  <!-- Main Content -->
-  <main>
-    <section>
-      <h2 class="section-title">About Me</h2>
-      <p>
-        Hi! I'm Abneer Shamawon, a 9th-grade student passionate about creating beautiful presentations and websites.
-        I use PowerPoint, Canva, and HTML. I've designed many school and business projects and always focus on delivering clear, creative results. Let's work together!
-      </p>
-    </section>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">☰</button>
 
-    <section>
-      <h2 class="section-title">Skills</h2>
-      <div class="grid skills">
-        <div class="card">PowerPoint Presentation Design</div>
-        <div class="card">HTML / CSS Web Design</div>
-        <div class="card">Responsive Website Layouts</div>
-        <div class="card">Fast Delivery & Communication</div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Experience</h2>
-      <div class="grid experience">
-        <div class="card"><img class="zoomable" src="presented by abneer shamawon.png"><strong>2025 - Business Presentation</strong></div>
-        <div class="card"><img class="zoomable" src="Portfolio.png"><strong>2025 - Business Presentation</strong></div>
-        <div class="card"><img class="zoomable" src="Presented by Abneer.png"><strong>2025 - Business Presentation</strong></div>
-        <div class="card"><img class="zoomable" src="yjjhjh.png"><strong>2025 - Educational Presentation</strong></div>
-        <div class="card"><img class="zoomable" src="Mr. Abneer Grade 1.png"><strong>2025 - Educational Presentation</strong></div>
-        <div class="card"><img class="zoomable" src="Untitled.png"><strong>2025 - Educational Presentation</strong></div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Get In Touch</h2>
-      <p class="email"><a href="mailto:pastorarshad79@gmail.com">pastorarshad79@gmail.com</a></p>
-      <p class="email"><a href="mailto:sabundani82@gmail.com">sabundani82@gmail.com</a></p>
-    </section>
-  </main>
-  
-  <!-- Download PDF Button -->
-  <div style="text-align: center; margin-top: 1rem;">
-    <a href="Abneer Shamawon.pdf" download="Abneer Shamawon.pdf" style="
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  background-color: #0d6efd;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease;
-">
-  📄 Download My Portfolio (PDF)
-</a>
-
+    <nav id="navLinks" class="nav-links" aria-label="Primary">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#cart" id="cartOpen" class="cart-btn" title="Open cart">Cart (<span id="cartCount">0</span>)</a>
+    </nav>
   </div>
+</header>
 
-  <!-- Hire Me Button -->
-  <div style="text-align: center; margin-top: 2rem;">
-    <button id="showOptions" style="
-      padding: 12px 24px;
-      font-size: 1.2rem;
-      border-radius: 8px;
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    ">Hire Me</button>
-  </div>
+<main>
 
+  <!-- HERO -->
+  <section id="home" class="hero" aria-label="Hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="glass-card fade-in">
+          <h1>Trusted Pharmacy &amp; Supplements Online</h1>
+          <p>Futuristic care, clinically oriented supplements, and safe pharmacy delivery — brought to your door. Browse trusted brands, get secure checkout, and track orders in real-time.</p>
+          <div class="cta-row">
+            <button class="shop-now glow-btn shop-now" id="heroShop">Shop Now</button>
+            <button class="glow-btn" id="quickBrowse" style="background:transparent;color:var(--muted);border:1px solid var(--glass-border)">Browse Products</button>
+          </div>
+        </div>
 
-  <!-- Hire Me Popup -->
-  <div id="popup" style="
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-  ">
-    <div style="
-      background: #1c1c1c;
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-      text-align: center;
-    ">
-      <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Select Your Presentation Type</h2>
-      <div style="display: flex; gap: 1rem; justify-content: center;">
-        <a href="https://www.fiverr.com/s/8zEP24o" target="_blank" style="
-          padding: 10px 20px;
-          background: #00c6ff;
-          color: white;
-          border-radius: 10px;
-          text-decoration: none;
-          font-weight: bold;
-        ">🎓 Educational</a>
-        <a href="https://www.fiverr.com/s/38ql32m" target="_blank" style="
-          padding: 10px 20px;
-          background: #4ea8ff;
-          color: white;
-          border-radius: 10px;
-          text-decoration: none;
-          font-weight: bold;
-        ">💼 Business</a>
+        <div style="margin-top:18px;display:flex;gap:12px;" class="fade-in delay-1">
+          <div class="micro">
+            <strong>Secure</strong><span>SSL &amp; Privacy</span>
+          </div>
+          <div class="micro">
+            <strong>Fast</strong><span>Same-day dispatch</span>
+          </div>
+          <div class="micro">
+            <strong>Verified</strong><span>Licensed suppliers</span>
+          </div>
+        </div>
       </div>
-      <button onclick="popup.style.display='none'" style="
-        margin-top: 1.5rem;
-        background: transparent;
-        color: white;
-        border: 1px solid #ccc;
-        padding: 8px 16px;
-        border-radius: 8px;
-        cursor: pointer;
-      ">Close</button>
+
+      <div class="scene fade-in delay-2" aria-hidden="true">
+        <div class="orb">
+          <!-- several floating CSS 3D objects -->
+          <div class="capsule" style="left:46%;top:24%;width:84px;height:36px;animation-duration:16s">
+            <div class="half c-blue" style="width:50%;height:100%;border-top-left-radius:24px;border-bottom-left-radius:24px"></div>
+            <div class="half c-green" style="width:50%;height:100%;border-top-right-radius:24px;border-bottom-right-radius:24px"></div>
+          </div>
+
+          <div class="capsule" style="left:18%;top:48%;width:56px;height:28px;animation-duration:12s;animation-delay:.6s">
+            <div class="half c-green" style="width:50%"></div><div class="half c-blue" style="width:50%"></div>
+          </div>
+
+          <div class="pill" style="left:58%;top:42%;width:22px;height:22px;animation-duration:9s;border-radius:8px"></div>
+
+          <div class="bottle" style="right:24px;bottom:28px">
+            <div class="bottle-cap"></div>
+            <div class="bottle-label">RX</div>
+          </div>
+
+          <div class="micro-cards" aria-hidden="true">
+            <div class="micro">
+              <strong>Clinically Reviewed</strong>
+              <span>Expert oversight</span>
+            </div>
+            <div class="micro">
+              <strong>Trusted Brands</strong>
+              <span>Certified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div>
+          <h2 class="section-title">Featured Products</h2>
+          <p style="margin:0;color:var(--muted)">Explore curated categories, explore 3D previews and add to cart.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="filters glass-card" id="filterRow" aria-hidden="false">
+            <button class="filter-btn active" data-cat="all">All</button>
+            <button class="filter-btn" data-cat="vitamins">Vitamins</button>
+            <button class="filter-btn" data-cat="herbal">Herbal</button>
+            <button class="filter-btn" data-cat="skin">Skin Care</button>
+            <button class="filter-btn" data-cat="prescription">Prescription</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-grid" id="productsGrid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES (detailed) -->
+  <section id="categories">
+    <div class="container">
+      <h2 class="section-title">Categories</h2>
+      <div class="glass-card" style="padding:20px">
+        <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+          <div style="flex:1;min-width:280px">
+            <p style="margin-top:0;color:var(--muted)">Filter products instantly with animated category buttons. Click to toggle.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px" id="categoryButtons">
+              <button class="filter-btn" data-cat="vitamins">Vitamins</button>
+              <button class="filter-btn" data-cat="herbal">Herbal</button>
+              <button class="filter-btn" data-cat="skin">Skin Care</button>
+              <button class="filter-btn" data-cat="prescription">Prescription</button>
+            </div>
+          </div>
+          <div style="width:360px;display:flex;align-items:center;justify-content:center">
+            <div class="floating-icon" aria-hidden="true">
+              <!-- stylized stethoscope + bottle using inline SVG -->
+              <svg width="84" height="84" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="18" width="22" height="30" rx="3" fill="#021017" opacity="0.06"/>
+                <rect x="10" y="22" width="14" height="22" rx="2" fill="white"/>
+                <circle cx="46" cy="22" r="10" fill="#021017" opacity="0.06"/>
+                <path d="M46 12c5 0 5 10 0 10" stroke="#021017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M40 30c4 0 4 8 0 8" stroke="#021017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <div class="about-grid">
+        <div>
+          <div class="glass-card">
+            <p style="margin-top:0;color:var(--muted)">Abneer Shamawon Pharmacy is dedicated to safe, verifiable medications and supplements with a focus on trust, speed, and evidence.</p>
+            <div style="margin-top:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+              <div class="stat">
+                <strong>98%</strong><div style="font-size:13px;color:var(--muted)">Customer satisfaction</div>
+              </div>
+              <div class="stat">
+                <strong>24/7</strong><div style="font-size:13px;color:var(--muted)">Support availability</div>
+              </div>
+              <div class="stat">
+                <strong>Licenses</strong><div style="font-size:13px;color:var(--muted)">Verified suppliers</div>
+              </div>
+              <div class="stat">
+                <strong>Secure</strong><div style="font-size:13px;color:var(--muted)">Encrypted payments</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="glass-card" style="height:100%;display:flex;align-items:center;justify-content:center">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+              <div class="floating-icon" aria-hidden="true" style="width:160px;height:160px;border-radius:18px;">
+                <!-- stethoscope + pill SVG (decorative) -->
+                <svg width="120" height="120" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 26c0-6 6-10 14-10s14 4 14 10v10" stroke="#021017" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <circle cx="48" cy="40" r="8" fill="#021017" opacity="0.06" />
+                  <rect x="44" y="12" width="8" height="14" rx="2" fill="white"/>
+                </svg>
+              </div>
+              <div style="text-align:center">
+                <strong style="font-size:20px">Healthcare trust</strong>
+                <div style="color:var(--muted)">Professional oversight, verified sourcing, secure delivery</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="glass-card" style="display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start;">
+        <div>
+          <form id="contactForm" class="contact-form" onsubmit="return false">
+            <div class="form-row">
+              <input id="cname" placeholder="Your name" required />
+            </div>
+            <div class="form-row">
+              <input id="cemail" type="email" placeholder="Email" required />
+            </div>
+            <div class="form-row">
+              <textarea id="cmsg" rows="4" placeholder="Your message" required></textarea>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="send-btn" id="sendContact">Send Message</button>
+              <div style="color:var(--muted);font-size:13px">We respond within 24 hours</div>
+            </div>
+          </form>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center">
+          <div style="font-weight:700">Live Support</div>
+          <div style="color:var(--muted);text-align:center">Click the chat bubble at bottom-right to begin a live chat with our team.</div>
+          <div style="margin-top:12px" aria-hidden="true">
+            <svg width="120" height="120" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="rgba(255,255,255,0.02)"/><path d="M22 26h20M22 32h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Cart panel (hidden until open) -->
+<div id="cartPanel" class="cart-panel" role="dialog" aria-modal="true" aria-label="Shopping cart" tabindex="-1">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <strong>Cart</strong>
+    <button id="closeCart" class="cart-btn" aria-label="Close cart">✕</button>
+  </div>
+  <div id="cartItems" style="margin-top:10px;max-height:300px;overflow:auto"></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+    <div style="color:var(--muted)">Total</div>
+    <div id="cartTotal" style="font-weight:900">$0.00</div>
+  </div>
+  <button id="checkoutBtn" class="checkout-btn">Checkout</button>
+</div>
+
+<!-- Floating chat -->
+<button class="chat-bubble" id="chatBubble" aria-label="Live chat">
+  💬
+</button>
+
+<!-- Footer -->
+<footer>
+  <div class="container footer-grid">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="logo" aria-hidden="true">AS</div>
+      <div>
+        <div style="font-weight:700">Abneer Shamawon Pharmacy</div>
+        <div style="font-size:13px;color:var(--muted)">Trusted Online Medicines</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="color:var(--muted)">© <span id="year"></span> Abneer Shamawon</div>
+      <div class="socials">
+        <a href="#" title="Facebook" aria-label="Facebook">🔵</a>
+        <a href="#" title="Instagram" aria-label="Instagram">📸</a>
+        <a href="#" title="Twitter" aria-label="Twitter">🐦</a>
+        <a href="#" title="LinkedIn" aria-label="LinkedIn">💼</a>
+      </div>
     </div>
   </div>
+</footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Abneer Shamawon. All rights reserved.</p>
-  </footer>
+<script>
+/* ==========================
+   Data (products)
+   ========================== */
+const PRODUCTS = [
+  { id: 'vit1', title:'Vitamin D3 2000IU', cat:'vitamins', price:12.99, desc:'Bone & immune support, 90 softgels', model:'capsule' },
+  { id: 'vit2', title:'MultiVitamin Daily', cat:'vitamins', price:18.50, desc:'Comprehensive multivitamin for adults', model:'bottle' },
+  { id: 'herb1', title:'Ginseng Extract', cat:'herbal', price:15.25, desc:'Energy & vitality, 60 capsules', model:'capsule' },
+  { id: 'skin1', title:'Hydrating Serum', cat:'skin', price:24.00, desc:'Hyaluronic acid serum, 30ml', model:'bottle' },
+  { id: 'pres1', title:'Pain Relief 500mg', cat:'prescription', price:9.99, desc:'Fast acting relief, 20 tablets', model:'pill' },
+  { id: 'herb2', title:'Turmeric Curcumin', cat:'herbal', price:19.99, desc:'Anti-inflammatory support, 60 caps', model:'capsule' },
+  { id: 'skin2', title:'SPF 50 Sunscreen', cat:'skin', price:17.49, desc:'Broad-spectrum protection', model:'bottle' },
+  { id: 'vit3', title:'Omega-3 Fish Oil', cat:'vitamins', price:21.75, desc:'Heart support, 120 softgels', model:'bottle' }
+];
 
-  <!-- Zoom Preview -->
-  <div class="hover-preview" id="hoverPreview">
-    <img id="hoverPreviewImg" src="" alt="Zoom Preview" />
-  </div>
+/* ==========================
+   Utilities & DOM
+   ========================== */
+const productsGrid = document.getElementById('productsGrid');
+const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+const categoryButtons = document.getElementById('categoryButtons');
+const cartPanel = document.getElementById('cartPanel');
+const cartItemsEl = document.getElementById('cartItems');
+const cartTotalEl = document.getElementById('cartTotal');
+const cartCountEl = document.getElementById('cartCount');
+const cartOpenBtn = document.getElementById('cartOpen');
+const closeCartBtn = document.getElementById('closeCart');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const heroShop = document.getElementById('heroShop');
+const quickBrowse = document.getElementById('quickBrowse');
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+const chatBubble = document.getElementById('chatBubble');
+const sendContact = document.getElementById('sendContact');
 
-  <!-- Scripts -->
-  <script>
-    const showOptions = document.getElementById("showOptions");
-    const popup = document.getElementById("popup");
-    showOptions.addEventListener("click", () => {
-      popup.style.display = "flex";
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ==========================
+   Build product cards
+   ========================== */
+function buildProducts(list){
+  productsGrid.innerHTML = '';
+  list.forEach(p=>{
+    const card = document.createElement('article');
+    card.className = 'glass-card product-card fade-in';
+    card.setAttribute('data-cat', p.cat);
+    card.innerHTML = `
+      <div class="product-3d">
+        <div class="model ${p.model}-model" data-id="${p.id}" aria-hidden="true">
+          <div class="face">${p.model === 'capsule' ? '' : ''}</div>
+        </div>
+      </div>
+      <div class="product-info">
+        <div>
+          <div class="product-title">${p.title}</div>
+          <div class="product-desc">${p.desc}</div>
+        </div>
+        <div class="product-bottom">
+          <div class="price">$${p.price.toFixed(2)}</div>
+          <button class="add-btn" data-id="${p.id}" aria-label="Add ${p.title} to cart">Add to Cart</button>
+        </div>
+      </div>
+    `;
+    productsGrid.appendChild(card);
+
+    // minor visual: create inside model elements representing capsule/bottle/pill
+    const modelEl = card.querySelector('.model');
+    if(p.model === 'capsule'){
+      modelEl.innerHTML = `
+        <div style="width:120px;height:48px;border-radius:40px;display:flex;overflow:hidden;box-shadow:inset 0 -6px 12px rgba(0,0,0,0.2)">
+          <div style="flex:1;background:linear-gradient(180deg,#0089ff,#004ccf)"></div>
+          <div style="flex:1;background:linear-gradient(180deg,#4de07a,#06a65a)"></div>
+        </div>
+      `;
+    } else if (p.model === 'bottle'){
+      modelEl.innerHTML = `
+        <div style="width:96px;height:116px;border-radius:12px;background:linear-gradient(180deg,#fff,#f8fbff);display:flex;flex-direction:column;align-items:center;padding-top:10px;border:1px solid rgba(2,8,23,0.06)">
+          <div style="width:42px;height:10px;border-radius:4px;background:#021017;margin-bottom:8px"></div>
+          <div style="width:68px;height:56px;border-radius:8px;background:linear-gradient(90deg,var(--accent-blue),var(--accent-green));display:flex;align-items:center;justify-content:center;font-weight:700;color:#021017"></div>
+        </div>
+      `;
+    } else { // pill
+      modelEl.innerHTML = `<div style="width:80px;height:40px;border-radius:10px;background:linear-gradient(180deg,#fff,#f4f7ff)"></div>`;
+    }
+
+    // attach hover 3D tilt (mouse)
+    card.querySelector('.product-3d').addEventListener('mousemove', (e)=>{
+      const model = e.currentTarget.querySelector('.model');
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = (e.clientX - rect.left) - rect.width/2;
+      const y = (e.clientY - rect.top) - rect.height/2;
+      model.style.transform = `rotateY(${x/8}deg) rotateX(${-y/10}deg)`;
     });
-
-    const preview = document.getElementById("hoverPreview");
-    const previewImg = document.getElementById("hoverPreviewImg");
-    const zoomableImages = document.querySelectorAll(".zoomable");
-    let hideTimeout;
-
-    zoomableImages.forEach(img => {
-      img.addEventListener("mouseover", () => {
-        clearTimeout(hideTimeout);
-        previewImg.src = img.src;
-        preview.style.display = "flex";
-      });
-
-      img.addEventListener("mouseout", () => {
-        hideTimeout = setTimeout(() => {
-          preview.style.display = "none";
-        }, 200);
-      });
+    card.querySelector('.product-3d').addEventListener('mouseleave', (e)=>{
+      const model = e.currentTarget.querySelector('.model');
+      model.style.transform = '';
     });
+  });
 
-    preview.addEventListener("mouseover", () => {
-      clearTimeout(hideTimeout);
+  // wire add buttons
+  Array.from(document.querySelectorAll('.add-btn')).forEach(b=>{
+    b.addEventListener('click', ()=> addToCart(b.dataset.id));
+  });
+}
+
+/* ==========================
+   Filtering
+   ========================== */
+function setActiveFilter(cat){
+  filterBtns.forEach(f=>f.classList.toggle('active', f.dataset.cat === cat));
+  filterBtns.forEach(f=>{
+    if(f.dataset.cat === cat || cat === 'all'){
+      f.classList.toggle('active', f.dataset.cat === cat);
+    }
+  });
+  // animate filtering
+  const filtered = (cat === 'all') ? PRODUCTS : PRODUCTS.filter(p=>p.cat === cat);
+  // simple fade-out / rebuild
+  productsGrid.style.opacity = '0.2';
+  setTimeout(()=>{ buildProducts(filtered); productsGrid.style.opacity = '1'; }, 220);
+}
+
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=> {
+    const cat = btn.dataset.cat;
+    // set visual active
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    setActiveFilter(cat);
+  });
+});
+
+/* category buttons elsewhere */
+document.querySelectorAll('#categoryButtons .filter-btn').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    // sync main filter row
+    document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+    const c = b.dataset.cat;
+    document.querySelector('.filter-btn[data-cat="'+c+'"]').classList.add('active');
+    setActiveFilter(c);
+    // scroll to products
+    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  });
+});
+
+/* ==========================
+   Cart system (simple)
+   ========================== */
+let CART = {}; // id -> qty
+
+function addToCart(id){
+  if(!CART[id]) CART[id]=0;
+  CART[id] += 1;
+  updateCartUI();
+  // small feedback animation
+  const btn = document.querySelector('.add-btn[data-id="'+id+'"]');
+  if(btn){
+    btn.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:300,easing:'ease-out'});
+  }
+}
+
+function updateCartUI(){
+  // count
+  const totalCount = Object.values(CART).reduce((s,n)=>s+n,0);
+  cartCountEl.textContent = totalCount;
+  // items list
+  cartItemsEl.innerHTML = '';
+  if(totalCount === 0){
+    cartItemsEl.innerHTML = '<div style="color:var(--muted);padding:12px">Your cart is empty.</div>';
+  } else {
+    Object.entries(CART).forEach(([id,qty])=>{
+      const product = PRODUCTS.find(p=>p.id===id);
+      if(!product) return;
+      const item = document.createElement('div');
+      item.className = 'cart-item';
+      item.innerHTML = `
+        <div class="cart-thumb">${product.title.split(' ')[0]}</div>
+        <div style="flex:1">
+          <div style="font-weight:700">${product.title}</div>
+          <div style="color:var(--muted);font-size:13px">$${product.price.toFixed(2)}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;align-items:end">
+          <div class="qty-controls">
+            <button data-op="dec" data-id="${id}">−</button>
+            <div style="padding:4px 6px;border-radius:6px;border:1px solid var(--glass-border);background:transparent">${qty}</div>
+            <button data-op="inc" data-id="${id}">+</button>
+          </div>
+          <button data-op="rm" data-id="${id}" style="font-size:12px;background:transparent;border:0;color:var(--muted);cursor:pointer">Remove</button>
+        </div>
+      `;
+      cartItemsEl.appendChild(item);
     });
-
-    preview.addEventListener("mouseout", () => {
-      preview.style.display = "none";
+  }
+  // attach controls
+  cartItemsEl.querySelectorAll('button[data-op]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const op = b.dataset.op, id = b.dataset.id;
+      if(op === 'inc'){ CART[id] = (CART[id]||0) + 1; }
+      if(op === 'dec'){ CART[id] = Math.max(0, (CART[id]||0) - 1); if(CART[id]===0) delete CART[id]; }
+      if(op === 'rm'){ delete CART[id]; }
+      updateCartUI();
     });
-  </script>
-  
+  });
+  // total
+  const total = Object.entries(CART).reduce((s,[id,qty])=>{
+    const p = PRODUCTS.find(x=>x.id===id);
+    return s + (p ? p.price * qty : 0);
+  }, 0);
+  cartTotalEl.textContent = '$' + total.toFixed(2);
+}
 
+/* open/close cart */
+cartOpenBtn.addEventListener('click', (e)=>{
+  e.preventDefault();
+  cartPanel.classList.toggle('open');
+  cartPanel.focus();
+});
+closeCartBtn.addEventListener('click', ()=>cartPanel.classList.remove('open'));
+document.addEventListener('click', (e)=>{
+  if(!cartPanel.contains(e.target) && !cartOpenBtn.contains(e.target) && !e.target.closest('.add-btn')){
+    // keep cart closed if clicked outside
+  }
+});
+
+/* checkout animation */
+checkoutBtn.addEventListener('click', ()=>{
+  if(Object.keys(CART).length === 0){
+    // hint
+    checkoutBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'},{transform:'translateY(0)'}],{duration:500,iterations:1});
+    alert('Your cart is empty — add products to checkout.');
+    return;
+  }
+  checkoutBtn.classList.add('pulse');
+  setTimeout(()=> {
+    checkoutBtn.classList.remove('pulse');
+    // simulate success
+    alert('Checkout complete — thank you! (Demo)');
+    CART = {};
+    updateCartUI();
+    cartPanel.classList.remove('open');
+  }, 900);
+});
+
+/* ==========================
+   Navbar & buttons
+   ========================== */
+heroShop.addEventListener('click', ()=> { document.getElementById('products').scrollIntoView({behavior:'smooth'}); heroShop.classList.add('glow'); setTimeout(()=>heroShop.classList.remove('glow'),1500) });
+quickBrowse.addEventListener('click', ()=> document.getElementById('categories').scrollIntoView({behavior:'smooth'}));
+
+navToggle.addEventListener('click', ()=>{
+  const open = navLinks.classList.toggle('mobile-open');
+  navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+
+/* smooth scroll highlight active nav */
+const navAnchors = Array.from(document.querySelectorAll('header a[href^="#"]'));
+function highlightNav(){
+  const fromTop = window.scrollY + 160;
+  navAnchors.forEach(link=>{
+    const section = document.querySelector(link.getAttribute('href'));
+    if(!section) return;
+    if(section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop){
+      link.style.color='white';
+    } else link.style.color = 'var(--muted)';
+  });
+}
+window.addEventListener('scroll', highlightNav);
+highlightNav();
+
+/* ==========================
+   Chat bubble & contact
+   ========================== */
+chatBubble.addEventListener('click', ()=>{
+  // miniature faux live chat: open contact form
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+  chatBubble.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:420});
+});
+
+sendContact.addEventListener('click', (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('cname').value.trim();
+  const email = document.getElementById('cemail').value.trim();
+  const msg = document.getElementById('cmsg').value.trim();
+  if(!name || !email || !msg) { alert('Please complete all fields.'); return; }
+  // simulate send
+  sendContact.disabled = true;
+  sendContact.textContent = 'Sending...';
+  setTimeout(()=> {
+    sendContact.disabled = false;
+    sendContact.textContent = 'Send Message';
+    alert('Message sent — we will reply to ' + email + ' within 24 hours. (Demo)');
+    document.getElementById('contactForm').reset();
+  }, 900);
+});
+
+/* ==========================
+   Initial rendering
+   ========================== */
+buildProducts(PRODUCTS);
+updateCartUI();
+
+/* ==========================
+   Accessibility & small enhancements
+   ========================== */
+// keyboard shortcut: press "c" to open cart
+document.addEventListener('keydown', (e)=>{
+  if(e.key.toLowerCase() === 'c' && !e.metaKey && !e.ctrlKey) {
+    cartPanel.classList.toggle('open');
+    cartPanel.focus();
+  }
+});
+
+/* Make product models slowly rotate randomly */
+setInterval(()=>{
+  document.querySelectorAll('.model').forEach(m=>{
+    const rx = (Math.random()*20-10);
+    const ry = (Math.random()*40-20);
+    m.style.transition = 'transform 6s ease-in-out';
+    m.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    setTimeout(()=> m.style.transition = '', 6200);
+  });
+}, 6000);
+
+/* create a few background "capsules" that follow cursor subtly for a cinematic feel */
+document.body.addEventListener('pointermove', (e)=>{
+  const x = e.clientX / window.innerWidth;
+  const y = e.clientY / window.innerHeight;
+  document.querySelectorAll('.molecule').forEach((m,i)=>{
+    m.style.transform = `translate3d(${(x-0.5)*(i+1)*6}vw, ${(y-0.5)*(i+1)*8}vh, 0) rotate(${(x+y)*40}deg)`;
+  });
+});
+
+/* small performance: reduce animations on very small devices */
+if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('*').forEach(n=>n.style.animationDuration = '0.001s');
+}
+
+</script>
 </body>
 </html>
